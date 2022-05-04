@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace project
 {
-    public partial class Form2 : Form
+    public partial class akun : Form
     {
-        public Form2()
+        public akun()
         {
             InitializeComponent();
         }
@@ -20,17 +20,6 @@ namespace project
         private void label1_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            akun ak = new akun();
-            ak.Show();
         }
     }
 }
