@@ -40,10 +40,20 @@ namespace project
                 dr.Read();
                 if(dr.HasRows)
                 {
-                    Form2 fm = new Form2();
-                    fm.Show();
-                    con.Close();
-                    this.Hide();
+                    if (dr[3].ToString() == "admin")
+                    {
+                        Form2 fm = new Form2();
+                        fm.Show();
+                        con.Close();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        menupegawai pgw = new menupegawai();
+                        pgw.Show();
+                        con.Close();
+                        this.Hide();
+                    }
                 }
                 else
                 {
