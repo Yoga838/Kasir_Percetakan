@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 
 namespace project
 {
@@ -16,6 +10,17 @@ namespace project
         public akun()
         {
             InitializeComponent();
+            load_data();
+        }
+        void load_data()
+        {
+            NpgsqlConnection con = new NpgsqlConnection(@"server=localhost;port=5432;user id=postgres;password=Bagus383`;database=kasir;");
+            con.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("select * from public.akun", con);
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -25,7 +30,7 @@ namespace project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -50,6 +55,7 @@ namespace project
                     textBox2.Text = "";
                     textBox3.Text = "";
                     MessageBox.Show("Berhasil menambahkan akun");
+                    load_data();
                 }
             }
             catch (Exception ex)
@@ -65,5 +71,39 @@ namespace project
         {
 
         }
+        public int id_akun;
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            id_akun = Convert.ToInt32(dataGridView1.SelectedCells[0].Value);
+            textBox1.Text = dataGridView1.SelectedCells[1].Value.ToString();
+            textBox2.Text = dataGridView1.SelectedCells[2].Value.ToString();
+            textBox3.Text = dataGridView1.SelectedCells[3].Value.ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (NpgsqlConnection con = new NpgsqlConnection(@"server=localhost;port=5432;user id=postgres;password=Bagus383`;database=kasir;"))
+                {
+                    con.Open();
+                    NpgsqlCommand cmd = new NpgsqlCommand("update akun set username = '" + textBox1.Text + "' , password = '"+textBox2.Text+"', jabatan = '"+textBox3.Text+"' where id_akun = '"+this.id_akun+"' ",con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    load_data();
+                    MessageBox.Show("berhasil mengedit");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("gagal");
+            }
+        }
+
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
