@@ -90,11 +90,11 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Bell MT", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(110, 166);
+            this.label3.Location = new System.Drawing.Point(32, 171);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 24);
+            this.label3.Size = new System.Drawing.Size(167, 24);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Jabatan :";
+            this.label3.Text = "admin / pegawai :";
             // 
             // button1
             // 
@@ -105,6 +105,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "Tambahkan";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // button2
             // 
@@ -153,7 +154,9 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Name = "akun";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "akun";
+            this.Load += new System.EventHandler(this.akun_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
