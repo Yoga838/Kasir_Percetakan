@@ -112,6 +112,12 @@
     <Compile Include="akun.Designer.cs">
       <DependentUpon>akun.cs</DependentUpon>
     </Compile>
+    <Compile Include="barang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="barang.Designer.cs">
+      <DependentUpon>barang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="akun.resx">
       <DependentUpon>akun.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="barang.resx">
+      <DependentUpon>barang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

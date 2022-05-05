@@ -32,5 +32,11 @@ namespace project
             akun ak = new akun();
             ak.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            barang brg = new barang();
+            brg.Show();
+        }
     }
 }
