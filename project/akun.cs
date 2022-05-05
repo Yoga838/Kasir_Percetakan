@@ -96,13 +96,33 @@ namespace project
             }
             catch (Exception ex)
             {
-                MessageBox.Show("gagal");
+                MessageBox.Show("gagal mengedit");
             }
         }
 
         private void dataGridView1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (NpgsqlConnection con = new NpgsqlConnection(@"server=localhost;port=5432;user id=postgres;password=Bagus383`;database=kasir;"))
+                {
+                    con.Open();
+                    NpgsqlCommand cmd = new NpgsqlCommand("delete from akun where id_akun = '" + this.id_akun + "' ", con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    load_data();
+                    MessageBox.Show("berhasil menghapus");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("gagal menghapus");
+            }
         }
     }
 }
