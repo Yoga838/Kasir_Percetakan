@@ -17,6 +17,18 @@ namespace project
         {
             InitializeComponent();
             dropdown_jenis();
+            dropdown_supplier();
+            load_data();
+        }
+        void load_data()
+        {
+            NpgsqlConnection con = new NpgsqlConnection(@"server=localhost;port=5432;user id=postgres;password=Bagus383`;database=kasir;");
+            con.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("select * from public.barang", con);
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
         }
         void dropdown_jenis()
         {
@@ -31,6 +43,48 @@ namespace project
             {
                 comboBox2.Items.Add(dr["id_jenis"].ToString());
             }
+        }
+        void dropdown_supplier()
+        {
+            NpgsqlConnection con = new NpgsqlConnection(@"server=localhost;port=5432;user id=postgres;password=Bagus383`;database = kasir;");
+            con.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("select id_supplier from supplier", con);
+            cmd.ExecuteNonQuery();
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            foreach (DataRow dr in dt.Rows)
+            {
+                comboBox1.Items.Add(dr["id_supplier"].ToString());
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NpgsqlConnection con = new NpgsqlConnection(@"server=localhost;port=5432;user id=postgres;password=Bagus383`;database=kasir;");
+            con.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("insert into barang (nama,harga,stock,id_supplier,id_jenis) values ('"+textBox1.Text+"','"+textBox2.Text+"','"+textBox3.Text+"','"+comboBox1.Text+"','"+comboBox2.Text+"')",con);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            con.Close();
+            textBox1.Text = " ";
+            textBox2.Text = " ";
+            textBox3.Text = " ";
+            comboBox1.Text = " ";
+            comboBox2.Text = " ";
+            load_data();
+        }
+        public int id_barang;
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            id_barang = Convert.ToInt32(dataGridView1.SelectedCells[0].Value);
+            textBox1.Text = dataGridView1.SelectedCells[1].Value.ToString();
+            textBox2.Text = dataGridView1.SelectedCells[2].Value.ToString();
+            textBox3.Text = dataGridView1.SelectedCells[3].Value.ToString();
+            comboBox1.Text = dataGridView1.SelectedCells[4].Value.ToString();
+            comboBox2.Text = dataGridView1.SelectedCells[5].Value.ToString();
+
         }
     }
 }
