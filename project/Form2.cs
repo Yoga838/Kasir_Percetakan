@@ -38,5 +38,11 @@ namespace project
             barang brg = new barang();
             brg.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            jenis_barang jns = new jenis_barang();
+            jns.Show();
+        }
     }
 }

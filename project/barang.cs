@@ -60,18 +60,27 @@ namespace project
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            NpgsqlConnection con = new NpgsqlConnection(@"server=localhost;port=5432;user id=postgres;password=Bagus383`;database=kasir;");
-            con.Open();
-            NpgsqlCommand cmd = new NpgsqlCommand("insert into barang (nama,harga,stock,id_supplier,id_jenis) values ('"+textBox1.Text+"','"+textBox2.Text+"','"+textBox3.Text+"','"+comboBox1.Text+"','"+comboBox2.Text+"')",con);
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            con.Close();
-            textBox1.Text = " ";
-            textBox2.Text = " ";
-            textBox3.Text = " ";
-            comboBox1.Text = " ";
-            comboBox2.Text = " ";
-            load_data();
+            try
+            {
+                NpgsqlConnection con = new NpgsqlConnection(@"server=localhost;port=5432;user id=postgres;password=Bagus383`;database=kasir;");
+                con.Open();
+                NpgsqlCommand cmd = new NpgsqlCommand("insert into barang (nama,harga,stock,id_supplier,id_jenis) values ('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + comboBox1.Text + "','" + comboBox2.Text + "')", con);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                con.Close();
+                textBox1.Text = " ";
+                textBox2.Text = " ";
+                textBox3.Text = " ";
+                comboBox1.Text = " ";
+                comboBox2.Text = " ";
+                load_data();
+                MessageBox.Show("berhasil menambahkan barang");
+            }
+            catch (Exception x)
+            {
+                MessageBox.Show("gagal menambahkan barang");  
+            }
+           
         }
         public int id_barang;
 
@@ -85,6 +94,51 @@ namespace project
             comboBox1.Text = dataGridView1.SelectedCells[4].Value.ToString();
             comboBox2.Text = dataGridView1.SelectedCells[5].Value.ToString();
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                NpgsqlConnection con = new NpgsqlConnection(@"server=localhost;port=5432;user id=postgres;password=Bagus383`;database=kasir;");
+                con.Open();
+                NpgsqlCommand cmd = new NpgsqlCommand("update barang set nama = '" + textBox1.Text + "', harga = '" + textBox2.Text + "', stock = '" + textBox3.Text + "', id_supplier = '" + comboBox1.Text + "', id_jenis = '" + comboBox2.Text + "' where id_barang = '" + this.id_barang + "' ", con);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                con.Close();
+                textBox1.Text = " ";
+                textBox2.Text = " ";
+                textBox3.Text = " ";
+                comboBox1.Text = " ";
+                comboBox2.Text = " ";
+                load_data();
+                MessageBox.Show("berhasil mengupdate");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("gagal mengupdate");
+            }
+           
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                NpgsqlConnection con = new NpgsqlConnection(@"server=localhost;port=5432;user id=postgres;password=Bagus383`;database=kasir;");
+                con.Open();
+                NpgsqlCommand cmd = new NpgsqlCommand("delete from barang where id_barang = '" + this.id_barang + "' ",con);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                con.Close();
+                load_data();
+                MessageBox.Show("berhasil menghapus data");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("gagal mengapus data");
+            }
+          
         }
     }
 }
