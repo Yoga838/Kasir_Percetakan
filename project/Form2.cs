@@ -44,5 +44,24 @@ namespace project
             jenis_barang jns = new jenis_barang();
             jns.Show();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Form1 frm= new Form1();
+            frm.Show();
+            this.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            supplier splr = new supplier();
+            splr.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            toko tk = new toko();
+            tk.Show();
+        }
     }
 }
