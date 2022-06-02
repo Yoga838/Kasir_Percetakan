@@ -16,5 +16,11 @@ namespace project
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            transaksi trx = new transaksi();
+            trx.Show();
+        }
     }
 }
